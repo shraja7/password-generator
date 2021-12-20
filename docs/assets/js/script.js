@@ -49,6 +49,18 @@ function generatePassword(params) {
   // while(!confirmLowerCase && !confirmUpperCase && !confirmNumber && !confirmSpecial){
 
   // }
+  if (
+    !confirmLowerCase &&
+    !confirmUpperCase &&
+    !confirmNumber &&
+    !confirmSpecial
+  ) {
+    alert("must choose at least one criteria");
+    confirmLowerCase = confirm("include lower case letters? ");
+    confirmUpperCase = confirm("include upper case letters? ");
+    confirmNumber = confirm("include numbers? ");
+    confirmSpecial = confirm("include special characters? ");
+  }
   if (confirmLowerCase && confirmUpperCase && confirmNumber && confirmSpecial) {
     result = password.concat(uppercase, lowercase, numbers, symbols);
     console.log("all 4 positive options", result);

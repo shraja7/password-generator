@@ -43,156 +43,63 @@ function generatePassword(params) {
   //   WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
 
-  // while (
-  //   !confirmLowerCase &&
-  //   !confirmUpperCase &&
-  //   !confirmNumber &&
-  //   !confirmSpecial
-  // ) {
-  //   alert("Must select at least one criteria to proceed: ");
-  //   var confirmLowerCase = confirm("include lower case letters? ");
-  //   var confirmUpperCase = confirm("include upper case letters? ");
-  //   var confirmNumber = confirm("include numbers? ");
-  //   var confirmSpecial = confirm("include special characters? ");
-  // }
-
-  // console.log(
-  //   confirmLowerCase,
-  //   confirmUpperCase,
-  //   confirmNumber,
-  //   confirmSpecial
-  // );
-
   //combination of responses
   //if all 4 are true
   var result = "";
+  // while(!confirmLowerCase && !confirmUpperCase && !confirmNumber && !confirmSpecial){
+
+  // }
   if (confirmLowerCase && confirmUpperCase && confirmNumber && confirmSpecial) {
-    //combine all strings into one
-    // password.concat(uppercase, lowercase);
-    // console.log("password :", password);
     result = password.concat(uppercase, lowercase, numbers, symbols);
-    console.log(result);
+    console.log("all 4 positive options", result);
   }
   //if 3 are true ----------------------------------------------
-  if (
-    !confirmLowerCase &&
-    confirmUpperCase &&
-    confirmNumber &&
-    confirmSpecial
-  ) {
-    result = password.concat(uppercase, numbers, symbols);
-    console.log(result);
+  else if (confirmSpecial && confirmNumber && confirmUpperCase) {
+    result = password.concat(numbers, uppercase, symbols);
+  } else if (confirmSpecial && confirmNumber && confirmLowerCase) {
+    result = password.concat(numbers, lowercase, symbols);
   }
-
-  //---
-  if (
-    confirmLowerCase &&
-    !confirmUpperCase &&
-    confirmNumber &&
-    confirmSpecial
-  ) {
-    result = password.concat(lowercase, numbers, symbols);
-    console.log(result);
-  }
-
-  //---
-  if (
-    confirmLowerCase &&
-    confirmUpperCase &&
-    !confirmNumber &&
-    confirmSpecial
-  ) {
-    result = password.concat(uppercase, lowercase, symbols);
-    console.log(result);
-  }
-  //---
-  if (
-    confirmLowerCase &&
-    confirmUpperCase &&
-    confirmNumber &&
-    !confirmSpecial
-  ) {
-    result = password.concat(uppercase, lowercase, numbers);
-    console.log(result);
-  }
-
-  //if 2 are true ------------------------------------------
-  if (confirmSpecial && confirmNumber) {
-    result = password.concat(numbers, symbols);
-    console.log(result);
-  }
-
   //
-  if (confirmSpecial && confirmLowerCase) {
+  else if (confirmSpecial && confirmUpperCase && confirmLowerCase) {
+    result = password.concat(symbols, uppercase, lowercase);
+    // console.log(result);
+  } else if (confirmNumber && confirmLowerCase && confirmUpperCase) {
+    result = password.concat(numbers, lowercase, uppercase);
+  }
+  //2 positive choices
+  else if (confirmSpecial && confirmNumber) {
+    result = password.concat(symbols, numbers);
+  } else if (confirmSpecial && confirmLowerCase) {
     result = password.concat(symbols, lowercase);
-    console.log(result);
-  }
-
-  //
-  if (confirmSpecial && confirmSpecial) {
+  } else if (confirmSpecial && confirmUpperCase) {
     result = password.concat(symbols, uppercase);
-    console.log(result);
-  }
-
-  //
-  if (confirmLowerCase && confirmNumber) {
+  } else if (confirmLowerCase && confirmNumber) {
     result = password.concat(lowercase, numbers);
-    console.log(result);
-  }
-
-  //
-  if (confirmLowerCase && confirmUpperCase) {
+  } else if (confirmLowerCase && confirmUpperCase) {
     result = password.concat(lowercase, uppercase);
-    console.log(result);
-  }
-
-  //
-  if (confirmNumber && confirmUpperCase) {
+  } else if (confirmNumber && confirmUpperCase) {
     result = password.concat(numbers, uppercase);
-    console.log(result);
   }
-
-  //
-  if (confirmSpecial && confirmNumber) {
-    result = password.concat(numbers, symbols);
-    console.log(result);
-  }
-
-  //if 1 option is true---------------------------------------------------------
-  if (confirmSpecial) {
+  //for single positive option
+  else if (confirmSpecial) {
     result = password.concat(symbols);
-  }
-
-  if (confirmNumber) {
+  } else if (confirmNumber) {
     result = password.concat(numbers);
-  }
-
-  if (confirmLowerCase) {
+  } else if (confirmLowerCase) {
     result = password.concat(lowercase);
+  } else if (confirmUpperCase) {
+    result = password.concat(uppercase);
   }
 
-  //generate random seelction for password
-  // var resultingRandom = "";
-  // for (let i = 0; i < result.length; i++) {
-  //   var randomLetter = result[Math.floor(Math.random() * result.length)];
-  //   resultingRandom.concat(randomLetter);
-  //   console.log(resultingRandom);
-  // }
-
-  //return only entered length
-  // var rand = "";
-  // for (let i = 0; i < characterLength; i++) {
-  //   // console.log(result[i]);
-  //   console.log(result[Math.floor(Math.random() * result.length)]);
-  // }
-
+  //get random letter from resulting string
+  console.log("current result string: ", result);
   var emptyString = "";
   while (emptyString.length < characterLength) {
     emptyString += result[Math.floor(Math.random() * result.length)];
   }
 
-  console.log(emptyString);
-  return result;
+  console.log("empty string: ", emptyString);
+  return emptyString;
 }
 
 // Write password to the #password input
